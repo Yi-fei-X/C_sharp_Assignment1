@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Assignment1.Data.Model\Assignment1.Data.Model.csproj" />
+    <ProjectReference Include="..\Assignment1.Data.Repository\Assignment1.Data.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
