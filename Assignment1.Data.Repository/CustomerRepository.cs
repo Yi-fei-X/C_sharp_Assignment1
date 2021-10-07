@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Assignment1.Data.Model;
-using System.Data.SqlClient;
+
 
 namespace Assignment1.Data.Repository
 {
@@ -15,7 +15,10 @@ namespace Assignment1.Data.Repository
         }
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+            string cmd = "delete from Customer where id = @id";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", id);
+            return db.Execute(cmd, parameters);
         }
 
         public IEnumerable<Customer> GetAll()
@@ -30,39 +33,30 @@ namespace Assignment1.Data.Repository
 
         public int Insert(Customer item)
         {
-            SqlConnection connection = db.GetConnection();  //unmange code
-            SqlCommand cmd = new SqlCommand();  //unmanage code
-            try
-            {
-                connection.Open();  //open the connection
-                cmd.CommandText = "Insert into Customer values (@id, @firstname, @lastname, @mobile, @emailid, @city, @state)";
-                cmd.Parameters.AddWithValue("@id", item.Id);
-                cmd.Parameters.AddWithValue("@firstname", item.FirstName);
-                cmd.Parameters.AddWithValue("@lastname", item.LastName);
-                cmd.Parameters.AddWithValue("@mobile", item.Mobile);
-                cmd.Parameters.AddWithValue("@emailid", item.EmailId);
-                cmd.Parameters.AddWithValue("@city", item.City);
-                cmd.Parameters.AddWithValue("@state", item.State);
-                cmd.Connection = connection;    //link sql command with connection string
-                int r = cmd.ExecuteNonQuery();  //call this method to insert, update, delete, not for select
-                return r;
-            }
-            catch (Exception ex)
-            {
-
-            }
-            finally
-            {
-                connection.Close();
-                connection.Dispose();   //remove object of unmanage code
-                cmd.Dispose();
-            }
-            return 0;
+            string cmd = "Insert into Customer values (@id, @firstname, @lastname, @mobile, @emailid, @city, @state)";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", item.Id);
+            parameters.Add("@firstname", item.FirstName);
+            parameters.Add("@lastname", item.LastName);
+            parameters.Add("@mobile", item.Mobile);
+            parameters.Add("@emailid", item.EmailId);
+            parameters.Add("@city", item.City);
+            parameters.Add("@state", item.State);
+            return db.Execute(cmd, parameters);
         }   
 
         public int Update(Customer item)
         {
-            throw new NotImplementedException();
+            string cmd = "update customer set firstname = @firstname, lastname = @lastname, mobile = @mobile, emailid = @emailid, city = @city, state = @state where id = @id";
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("@id", item.Id);
+            parameters.Add("@firstname", item.FirstName);
+            parameters.Add("@lastname", item.LastName);
+            parameters.Add("@mobile", item.Mobile);
+            parameters.Add("@emailid", item.EmailId);
+            parameters.Add("@city", item.City);
+            parameters.Add("@state", item.State);
+            return db.Execute(cmd, parameters);
         }
     }
 }

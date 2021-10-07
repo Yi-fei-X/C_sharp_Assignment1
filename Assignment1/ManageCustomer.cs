@@ -36,10 +36,23 @@ namespace Assignment1
             else
                 Console.WriteLine("Add customer failed");
         }
+        void UpdateCustomer()
+        {
+
+        }
+        void DeleteCustomer()
+        {
+            Console.Write("Enter id = ");
+            int id = Convert.ToInt32(Console.ReadLine());
+            if (customerRepository.Delete(id) > 0)
+                Console.WriteLine("Customer deleted successfully");
+            else
+                Console.WriteLine("Delete customer failed");
+        }
 
         public void Run()
         {
-            AddCustomer();
+            DeleteCustomer();
         }
 
 
