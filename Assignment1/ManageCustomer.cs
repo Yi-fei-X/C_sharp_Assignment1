@@ -49,10 +49,32 @@ namespace Assignment1
             else
                 Console.WriteLine("Delete customer failed");
         }
-
+        void PrintCustomers()
+        {
+            var collection = customerRepository.GetAll();
+            if (collection != null)
+            {
+                foreach (var item in collection)
+                {
+                    Console.WriteLine($"{item.Id} \t {item.FirstName} \t {item.LastName} \t {item.Mobile} \t {item.EmailId} \t {item.City} \t {item.State}");
+                }
+            }
+        }
+        void PrintCustomerById()
+        {
+            Console.Write("Enter id =");
+            int id = Convert.ToInt32(Console.ReadLine());
+            Customer c = customerRepository.GetById(id);
+            if (c != null)
+            {
+                Console.WriteLine($"{c.Id} \t {c.FirstName} \t {c.LastName} \t {c.Mobile} \t {c.EmailId} \t {c.City} \t {c.State}");
+            }
+            else
+                Console.WriteLine("No customer found");
+        }
         public void Run()
         {
-            DeleteCustomer();
+            PrintCustomerById();
         }
 
 
